@@ -56,6 +56,23 @@ angular.module('anthropocenesiteApp')
                 });
                 return deferred.promise;
             },
+            getNetwork : function(params){
+              var serviceUrl = 'network';
+              var deferred = $q.defer();
+
+              $http({
+                  method: 'GET',
+                  url : baseUrl + serviceUrl,
+                  params : params
+                })
+              .success(function(data){
+                deferred.resolve(data);
+              }).error(function(){
+                deferred.reject("An error occured while fetching file");
+              });
+
+              return deferred.promise;
+            },
             getFile : function(url){
                 var deferred = $q.defer();
                 $http.get(url).success(function(data){
@@ -65,6 +82,15 @@ angular.module('anthropocenesiteApp')
                 });
 
                 return deferred.promise;
+            },
+            getVideoUrl : function(id) {
+                return videobaseurl + id + ".mp4";
+            },
+            getThumbUrl : function(videoId, chunkId) {
+                var thumburl = "antropovids/thumbs/output/";
+                chunkId = chunkId.replace(videoId+"-","");
+                var ch = chunkId.split("-")[0];
+                return baseurl + thumburl + videoId + "/chunk-" + (parseInt(ch)+1) + "-sh-2.png";
             }
         }
     });
