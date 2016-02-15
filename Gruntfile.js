@@ -398,7 +398,12 @@ module.exports = function (grunt) {
         'svgmin'
       ]
     },
-
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
+    },
     // Test settings
     karma: {
       unit: {
@@ -453,7 +458,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'gh-pages'
   ]);
 
   grunt.registerTask('default', [
